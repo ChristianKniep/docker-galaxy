@@ -1,0 +1,23 @@
+consul:
+    image: qnib/consul
+    ports:
+     - "8500:8500"
+    environment:
+    - DC_NAME=dc1
+    - FORWARD_TO_SYSLOG=false
+    dns: 127.0.0.1
+    hostname: consul
+    privileged: true
+
+galaxy:
+    image: qnib/galaxy
+    ports:
+     - "8080:80"
+    links:
+    - consul:consul
+    environment:
+    - DC_NAME=dc1
+    - FORWARD_TO_SYSLOG=flase
+    dns: 127.0.0.1
+    hostname: galaxy
+    privileged: true

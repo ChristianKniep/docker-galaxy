@@ -1,0 +1,10 @@
+{
+  "service": {
+    "name": "galaxy",
+    "port": 8080,
+    "check": {
+      "script": "nmap 127.0.0.1 -PN -p 8080 | grep open",
+      "interval": "10s"
+    }
+  }
+}
