@@ -17,7 +17,7 @@ galaxy:
     - consul:consul
     environment:
     - DC_NAME=dc1
-    - FORWARD_TO_SYSLOG=flase
+    - FORWARD_TO_SYSLOG=false
     dns: 127.0.0.1
     hostname: galaxy
     privileged: true
