@@ -4,13 +4,13 @@ consul:
      - "8500:8500"
     environment:
     - DC_NAME=dc1
-    - FORWARD_TO_SYSLOG=false
+    - ENABLE_SYSLOG=true
     dns: 127.0.0.1
     hostname: consul
     privileged: true
 
 galaxy:
-    image: qnib/galaxy
+    image: qnib/galaxy:dev
     ports:
      - "8080:80"
     links:
@@ -20,4 +20,32 @@ galaxy:
     - FORWARD_TO_SYSLOG=false
     dns: 127.0.0.1
     hostname: galaxy
+    privileged: true
+
+slurmctld:
+    image: qnib/slurmctld:dev
+    ports:
+    - "6817:6817"
+    links:
+    - consul:consul
+    environment:
+    - DC_NAME=dc1
+    - SERVICE_6817_NAME=slurmctld
+    - ENABLE_SYSLOG=true
+    dns: 127.0.0.1
+    hostname: slurmctld
+    privileged: true
+
+slurmd:
+    image: qnib/slurmd:dev
+    links:
+    - consul:consul
+    - slurmctld:slurmctld
+    environment:
+    - DC_NAME=dc1
+    - ENABLE_SYSLOG=true
+    volumes:
+    - ${HOME}/shared/chome/:/chome/
+    dns: 127.0.0.1
+    #hostname: slurmd
     privileged: true
