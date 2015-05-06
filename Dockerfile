@@ -11,4 +11,4 @@ ADD opt/galaxy/config/galaxy.ini /opt/galaxy/config/galaxy.ini
 ADD etc/nginx/nginx.conf /etc/nginx/
 ADD etc/nginx/conf.d/galaxy.conf /etc/nginx/conf.d/
 ADD etc/supervisord.d/galaxy.ini /etc/supervisord.d/galaxy.ini
-ADD etc/consul.d/check_grafana.json /etc/consul.d/
+ADD etc/consul.d/check_galaxy.json /etc/consul.d/
